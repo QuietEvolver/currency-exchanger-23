@@ -30,25 +30,6 @@ function getAPIData(city) {
 
 }
 
-// async function getGif(fish) {
-//   const response = await GifApiCall.getGif(fish);
-//   console.log(response)
-//   if (response.data) {
-//     printElements(response, fish);
-//   } else {
-//     printError(response, fish);
-//   }
-// }
-
-// UI Logic
-
-// function printElements(fish) {
-//   const img = document.createElement('img');
-//   img.setAttribute('src', fish.data[Math.floor(Math.random() * 24)].images.original.url);
-//   img.setAttribute('class', 'gif');
-//   document.querySelector('#where-the-api-info-goes').append(img);
-// }
-
 //displays the gif
 function displayGif(response, city) {
   const url = response.data[0].images.downsized.url;
@@ -65,8 +46,8 @@ function printWeather(description, city) {
 
 function printError(error) {
   document.querySelector('#error').innerText = error;
-// document.querySelector('#where-the-api-info-goes').innerText = `There was an error getting ${fish}: ${error}`;
 }
+
 //clear previous results.
 function clearResults() {
   document.querySelector("#gif").innerText = null;
@@ -75,10 +56,6 @@ function clearResults() {
 }
 function userInputForm(event) {
   event.preventDefault();
-  // let fish = document.querySelector('#user-input').value;
-  // document.querySelector('#user-input').value = null;
-  // getGif(fish);
-  // we call our new function (below) to clear previous results
   clearResults();
   const city = document.querySelector('#user-input').value;
   document.querySelector('#user-input').value = null;

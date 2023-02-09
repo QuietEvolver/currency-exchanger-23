@@ -1,0 +1,6 @@
+// weather & gif in place.
+// TM: Getting events for a particular artist OR venue in a specific country/city/zip code/DMA/etc.
+
+
+[ gets res for PDX (misc TM ex.key)]
+https://app.ticketmaster.com/discovery/v2/events.json?city=portland&apikey=IM4MvuT6CKSryD05OGO6O2vOlcqDpQiH
