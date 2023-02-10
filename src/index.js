@@ -1,8 +1,9 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import GifApiCall from './js/giphy.js';
-import WeatherReport from './js/weather.js';
+import GifApiCall from './services/giphy.js';
+import WeatherReport from './services/weather.js';
+import TicketMasterApi from './services/attractions.js';
 
 // Business Logic
 
@@ -15,7 +16,16 @@ function getAPIData(city) {
       }
       const description = weatherResponse.weather[0].description;
       printWeather(description, city);
-      return GifApiCall.getGif(city);
+      return TicketMasterApi.getTicket(city);
+    })
+    .then(function(ticketResponse) {
+      if (ticketResponse instanceof Error) {
+        const errorMessage = `there was a problem accessing the ticket events data from Giphy API: ${ticketResponse.message}.`;
+        throw new Error(errorMessage);
+      }
+      const cityName = ticketResponse._embedded.events[0]._embedded.city;//venues.city.name
+      displayTickets(cityName, city);
+      return GifApiCall.getGif(cityName);
     })
     .then(function(giphyResponse) {
       if (giphyResponse instanceof Error) {
@@ -30,6 +40,16 @@ function getAPIData(city) {
 
 }
 
+// has the message it prints to the DOM
+function printWeather(description, city) {
+  document.querySelector('#weather-description').innerText = `The weather in ${city} is ${description}.`;
+}
+
+// tix fxn for events
+function displayTickets(events, city){
+  document.querySelector("#ticketmaster").innerText = `Events in ${city}, are ${events} `;
+}
+
 //displays the gif
 function displayGif(response, city) {
   const url = response.data[0].images.downsized.url;
@@ -37,12 +57,7 @@ function displayGif(response, city) {
   img.src = url;
   img.alt = `${city} weather`;
   document.querySelector("#gif").append(img);
-}
-
-// has the message it prints to the DOM
-function printWeather(description, city) {
-  document.querySelector('#weather-description').innerText = `The weather in ${city} is ${description}.`;
-}
+} 
 
 function printError(error) {
   document.querySelector('#error').innerText = error;
