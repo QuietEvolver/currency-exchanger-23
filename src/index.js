@@ -45,10 +45,41 @@ function clearResults() {
 function userInputForm(event) {
   event.preventDefault();
   clearResults();
-  const city = document.querySelector('#user-input').value;
+  const usDollar = document.querySelector('#user-input').value;
   document.querySelector('#user-input').value = null;
+
+  const form = document.querySelector("form");
+  const log = document.querySelector("#log");
+
+  const data = new FormData(form);
+  //radio.rate  // Add each size
+  let value = this.size; 
+  for (const [key, value] of data) {
+    if (key === "size") {
+      size = value;
+    }
+    // let msg = "Choose an option";
+    switch(size){
+      case("small"): 
+        this.size = "small";
+        sizePrice = 5;
+        return sizePrice;
+      case("medium"): 
+        this.size = "medium";
+        sizePrice = 10;
+        return sizePrice;
+      case("large"):
+        this.size = "large";
+        sizePrice = 15;
+        return sizePrice;
+      default: 
+      console.log("Choose a sz");
+      // output.innerHTML = msg;  // webAPI: MessageChannel; 
+    }
+  }
+
   // we update the name of the function that makes the API call
-  getAPIData(city);
+  getAPIData(usDollar);
 }
 
 window.addEventListener("load", function() {
