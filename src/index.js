@@ -1,67 +1,35 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import GifApiCall from './services/giphy.js';
-import WeatherReport from './services/weather.js';
-import TicketMasterApi from './services/attractions.js';
+import CurrencyExchangeService from './services/currency.js';
 
 // Business Logic
 
 function getAPIData(city) {
-  WeatherReport.getWeather(city)
-    .then (function(weatherResponse){
-      if(weatherResponse instanceof Error) {
-        const errorMessage = `there was problem accessing the weather data from OpenWeather API for ${city}: ${weatherResponse.message}`;
-        throw new Error (errorMessage);
-      }
-      const description = weatherResponse.weather[0].description;
-      printWeather(description, city);
-      return TicketMasterApi.getTicket(city);
-    })
-    .then(function(ticketResponse) {
-      if (ticketResponse instanceof Error) {
-        const errorMessage = `there was a problem accessing the ticket events data from Giphy API: ${ticketResponse.message}.`;
+  CurrencyExchangeService.getWeather(city)
+    .then(function(currencyResponse) {
+      if (currencyResponse instanceof Error) {
+        const errorMessage = `there was a problem accessing the ticket events data from currency exchange API: ${currencyResponse.message}.`;
         throw new Error(errorMessage);
       } // loops events
       for (let i = 0; i < 20; i++) {
-        let cityNames = ticketResponse._embedded.events[i].name;
+        //let cityNames = currencyResponse._embedded.events[i].name;
         console.log(cityNames);
-        displayTickets(cityNames, city);
+        displayCurrencies(cityNames, city);
       } // declared constant outside for var access
-      const cityName = ticketResponse._embedded.events[0].name;
-      return GifApiCall.getGif(cityName);
-    })
-    .then(function(giphyResponse) {
-      if (giphyResponse instanceof Error) {
-        const errorMessage = `there was a problem accessing the gif data from Giphy API: ${giphyResponse.message}.`;
-        throw new Error(errorMessage);
-      }
-      displayGif(giphyResponse, city);
+      //const cityName = currencyResponse._embedded.events[0].name;
+      displayCurrencies(currencyResponse, city);
     })
     .catch(function(error) {
       printError(error);
     });
 }
 
-// has the message it prints to the DOM
-function printWeather(description, city) {
-  document.querySelector('#weather-description').innerText = `The weather in ${city} is ${description}.`;
-}
-
-// tix fxn for events
-function displayTickets(events, city){
+// currency fxn for rates
+function displayCurrencies(req, res){
   // add += to add each [i] of loop
-  document.querySelector("#ticketmaster").innerText += `\n Events in ${city}, are ${events} `;
+  document.querySelector("#currency").innerText += `\n Exchange rates in ${res}, are ${req} `;
 }
-
-//displays the gif
-function displayGif(response, city) {
-  const url = response.data[0].images.downsized.url;
-  const img = document.createElement("img");
-  img.src = url;
-  img.alt = `${city} weather`;
-  document.querySelector("#gif").append(img);
-} 
 
 function printError(error) {
   document.querySelector('#error').innerText = error;
@@ -69,9 +37,8 @@ function printError(error) {
 
 //clear previous results.
 function clearResults() {
-  document.querySelector("#gif").innerText = null;
+  document.querySelector("#currency").innerText = null;
   document.querySelector('#error').innerText = null;
-  document.querySelector('#weather-description').innerText = null;
 }
 function userInputForm(event) {
   event.preventDefault();
