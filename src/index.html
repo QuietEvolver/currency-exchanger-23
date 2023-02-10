@@ -14,8 +14,36 @@
    btc
   </pre>
   <form id="user-input-form">
-    <label for="user-input">Enter a search:</label>
+    <label for="user-input">Enter an amount in dollars (USDÍ):</label>
     <input id="user-input" type="text">
+    <!-- radio-rate-select -->
+    <fieldset>
+      <legend>Select your desired denomination:</legend>
+  
+      <div>
+        <input id="AED" class="rate" type="radio" name="rate" value="AED">
+        <label for="AED">AED</label>
+      </div>
+  
+      <div>
+        <input id="BAM" class="rate" type="radio" name="rate" value="BAM">
+        <label for="BAM">BAM</label>
+      </div>
+  
+      <div>
+        <input id="CAD" class="rate" type="radio" name="rate" value="CAD" checked>
+        <label for="CAD">CAD</label>
+      </div>
+      <div>
+        <input id="DJF" class="rate" type="radio" name="rate" value="DJF">
+        <label for="DJF">DJF</label>
+      </div>
+  
+      <div>
+        <input id="EGP" class="rate" type="radio" name="rate" value="EGP">
+        <label for="EGP">EGP</label>
+      </div>
+    </fieldset>    
     <button type="submit">SUBMIT</button>
   </form>
   
