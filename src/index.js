@@ -60,20 +60,28 @@ function userInputForm(event) {
     }
     // let msg = "Choose an option";
     switch(size){
-      case("small"): 
-        this.size = "small";
+      case("AED"): 
+        this.size = "AED";
         sizePrice = 5;
         return sizePrice;
-      case("medium"): 
-        this.size = "medium";
+      case("BAM"): 
+        this.size = "BAM";
         sizePrice = 10;
         return sizePrice;
-      case("large"):
-        this.size = "large";
+      case("CAD"):
+        this.size = "CAD";
         sizePrice = 15;
         return sizePrice;
+        case("DJF"): 
+          this.size = "DJF";
+          sizePrice = 10;
+          return sizePrice;
+        case("EGP"):
+          this.size = "EGP";
+          sizePrice = 15;
+          return sizePrice;
       default: 
-      console.log("Choose a sz");
+      console.log("Choose a currency");
       // output.innerHTML = msg;  // webAPI: MessageChannel; 
     }
   }
