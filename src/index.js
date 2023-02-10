@@ -23,9 +23,12 @@ function getAPIData(city) {
         const errorMessage = `there was a problem accessing the ticket events data from Giphy API: ${ticketResponse.message}.`;
         throw new Error(errorMessage);
       }
+      for (let i = 0; i < 20; i++) {
+        let cityNames = ticketResponse._embedded.events[i].name;
+        console.log(cityNames);
+        displayTickets(cityNames, city);
+      }
       const cityName = ticketResponse._embedded.events[0].name;
-      console.log(cityName);
-      displayTickets(cityName, city);
       return GifApiCall.getGif(cityName);
     })
     .then(function(giphyResponse) {
@@ -48,7 +51,7 @@ function printWeather(description, city) {
 
 // tix fxn for events
 function displayTickets(events, city){
-  document.querySelector("#ticketmaster").innerText = `Events in ${city}, are ${events} `;
+  document.querySelector("#ticketmaster").innerText += `\n Events in ${city}, are ${events} `;
 }
 
 //displays the gif
