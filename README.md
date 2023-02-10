@@ -1,4 +1,4 @@
-# _Open Weather API_
+# _Currency Exchange API_
 
 #### By _Vera Weikel_
 
