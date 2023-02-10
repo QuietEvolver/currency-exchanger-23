@@ -81,6 +81,7 @@ function userInputForm(event) {
           // ratePrice = currencyResponse.conversion_rates["EGP"];
           return ratePrice;
       default: 
+      // TODO: Update log --> DOM to return a notification.
       console.log("Choose a currency OR currency in question doesn't exist.");
       // output.innerHTML = msg;  // webAPI: MessageChannel; 
     }
