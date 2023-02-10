@@ -13,11 +13,12 @@ function getAPIData(city) {
         throw new Error(errorMessage);
       } // loops events
       for (let i = 0; i < 20; i++) {
-        //let cityNames = currencyResponse._embedded.events[i].name;
-        console.log(cityNames);
-        displayCurrencies(cityNames, city);
+        //let currentRates = currencyResponse._embedded.events[i].name;
+        console.log(currentRates);
+          // TODO: if/else
+        displayCurrencies(currentRates, city);
       } // declared constant outside for var access
-      //const cityName = currencyResponse._embedded.events[0].name;
+      //const currentRates = currencyResponse._embedded.events[0].name;
       displayCurrencies(currencyResponse, city);
     })
     .catch(function(error) {
@@ -25,10 +26,11 @@ function getAPIData(city) {
     });
 }
 
-// currency fxn for rates
+// currency fxn for latest rates
 function displayCurrencies(req, res){
   // add += to add each [i] of loop
   document.querySelector("#currency").innerText += `\n Exchange rates in ${res}, are ${req} `;
+
 }
 
 function printError(error) {
