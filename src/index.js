@@ -19,6 +19,7 @@ function getAPIData(city) {
         displayCurrencies(currentRates, city);
       } // declared constant outside for var access
       const currentRates = currencyResponse.conversion_rates; //.events[0].name;
+      console.log("current Rates: ", currentRates);
       displayCurrencies(currencyResponse, city);
     })
     .catch(function(error) {
@@ -48,47 +49,47 @@ function userInputForm(event) {
   const usDollar = document.querySelector('#user-input').value;
   document.querySelector('#user-input').value = null;
 
-  const form = document.querySelector("form");
-  const log = document.querySelector("#log");
+  // const form = document.querySelector("form");
+  // const log = document.querySelector("#log");
 
-  const data = new FormData(form);
-  //radio.rate  // Add each size
-  let value = this.rate; 
-  for (const [key, value] of data) {
-    if (key === "size") {
-      rate = value;
-    }
-    // let msg = "Choose an option";
-    switch(rate){
-    case("AED"): 
-      this.rate = "AED";
-      // ratePrice = currencyResponse.conversion_rates["AED"];
-      return ratePrice;
-    case("BAM"): 
-      this.rate = "BAM";
-      // ratePrice = currencyResponse.conversion_rates["BAM"];
-      return ratePrice;
-    case("CAD"):
-      this.rate = "CAD";
-      // ratePrice = currencyResponse.conversion_rates["CAD"];
-      return ratePrice;
-    case("DJF"): 
-      this.rate = "DJF";
-      // ratePrice = currencyResponse.conversion_rates["DJF"];
-      return ratePrice;
-    case("EGP"):
-      this.rate = "EGP";
-      // ratePrice = currencyResponse.conversion_rates["EGP"];
-      return ratePrice;
-    default: 
-    // TODO: Update log --> DOM to return a notification.
-      console.log("Choose a currency OR currency in question doesn't exist.");
-    // output.innerHTML = msg;  // webAPI: MessageChannel; 
-    console.log("entry(ies) ", output);
-    event.preventDefault();
-    }
-    log.innerText = output;
-  }
+  // const data = new FormData(form);
+  // //radio.rate  // Add each size
+  // // let value = this.rate; 
+  // for (const [key, value] of data) {
+  //   if (key === "size") {
+  //     rate = value;
+  //   }
+  //   // let msg = "Choose an option";
+  //   switch(rate){
+  //   case("AED"): 
+  //     this.rate = "AED";
+  //     // ratePrice = currencyResponse.conversion_rates["AED"];
+  //     return ratePrice;
+  //   case("BAM"): 
+  //     this.rate = "BAM";
+  //     // ratePrice = currencyResponse.conversion_rates["BAM"];
+  //     return ratePrice;
+  //   case("CAD"):
+  //     this.rate = "CAD";
+  //     // ratePrice = currencyResponse.conversion_rates["CAD"];
+  //     return ratePrice;
+  //   case("DJF"): 
+  //     this.rate = "DJF";
+  //     // ratePrice = currencyResponse.conversion_rates["DJF"];
+  //     return ratePrice;
+  //   case("EGP"):
+  //     this.rate = "EGP";
+  //     // ratePrice = currencyResponse.conversion_rates["EGP"];
+  //     return ratePrice;
+  //   default: 
+  //     // TODO: Update log --> DOM to return a notification.
+  //     console.log("Choose a currency OR currency in question doesn't exist.");
+  //     // output.innerHTML = msg;  // webAPI: MessageChannel; 
+  //     console.log("entry(ies) ", output);
+  //     event.preventDefault();
+  //   }
+  //   log.innerText = output;
+  // }
 
   // we update the name of the function that makes the API call
   getAPIData(usDollar);
