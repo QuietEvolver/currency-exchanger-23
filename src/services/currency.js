@@ -8,6 +8,7 @@ export default class CurrencyExchangeService {
         ${jsonifiedResponse.message}`;
         throw new Error(errorMessage);
       }
+      console.log(rain);
       return jsonifiedResponse;
     } catch(error) {
       return error;
