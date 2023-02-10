@@ -13,12 +13,12 @@ function getAPIData(city) {
         throw new Error(errorMessage);
       } // loops events
       for (let i = 0; i < 20; i++) {
-        //let currentRates = currencyResponse.conversion_rates;// .events[i].name;
+        let currentRates = currencyResponse.conversion_rates;// .events[i].name;
         console.log(currentRates);
-          // TODO: if/else
+        // TODO: if/else
         displayCurrencies(currentRates, city);
       } // declared constant outside for var access
-      //const currentRates = currencyResponse.conversion_rates; //.events[0].name;
+      const currentRates = currencyResponse.conversion_rates; //.events[0].name;
       displayCurrencies(currencyResponse, city);
     })
     .catch(function(error) {
@@ -60,31 +60,34 @@ function userInputForm(event) {
     }
     // let msg = "Choose an option";
     switch(rate){
-      case("AED"): 
-        this.rate = "AED";
-        // ratePrice = currencyResponse.conversion_rates["AED"];
-        return ratePrice;
-      case("BAM"): 
-        this.rate = "BAM";
-        // ratePrice = currencyResponse.conversion_rates["BAM"];
-        return ratePrice;
-      case("CAD"):
-        this.rate = "CAD";
-        // ratePrice = currencyResponse.conversion_rates["CAD"];
-        return ratePrice;
-        case("DJF"): 
-          this.rate = "DJF";
-          // ratePrice = currencyResponse.conversion_rates["DJF"];
-          return ratePrice;
-        case("EGP"):
-          this.rate = "EGP";
-          // ratePrice = currencyResponse.conversion_rates["EGP"];
-          return ratePrice;
-      default: 
-      // TODO: Update log --> DOM to return a notification.
+    case("AED"): 
+      this.rate = "AED";
+      // ratePrice = currencyResponse.conversion_rates["AED"];
+      return ratePrice;
+    case("BAM"): 
+      this.rate = "BAM";
+      // ratePrice = currencyResponse.conversion_rates["BAM"];
+      return ratePrice;
+    case("CAD"):
+      this.rate = "CAD";
+      // ratePrice = currencyResponse.conversion_rates["CAD"];
+      return ratePrice;
+    case("DJF"): 
+      this.rate = "DJF";
+      // ratePrice = currencyResponse.conversion_rates["DJF"];
+      return ratePrice;
+    case("EGP"):
+      this.rate = "EGP";
+      // ratePrice = currencyResponse.conversion_rates["EGP"];
+      return ratePrice;
+    default: 
+    // TODO: Update log --> DOM to return a notification.
       console.log("Choose a currency OR currency in question doesn't exist.");
-      // output.innerHTML = msg;  // webAPI: MessageChannel; 
+    // output.innerHTML = msg;  // webAPI: MessageChannel; 
+    console.log("entry(ies) ", output);
+    event.preventDefault();
     }
+    log.innerText = output;
   }
 
   // we update the name of the function that makes the API call
