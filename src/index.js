@@ -9,7 +9,7 @@ function getAPIData(city) {
   CurrencyExchangeService.getWeather(city)
     .then(function(currencyResponse) {
       if (currencyResponse instanceof Error) {
-        const errorMessage = `there was a problem accessing the ticket events data from currency exchange API: ${currencyResponse.message}.`;
+        const errorMessage = `there was a problem accessing the data from currency exchange request: ${currencyResponse.message}.`;
         throw new Error(errorMessage);
       } // loops events
       for (let i = 0; i < 20; i++) {
@@ -53,35 +53,35 @@ function userInputForm(event) {
 
   const data = new FormData(form);
   //radio.rate  // Add each size
-  let value = this.size; 
+  let value = this.rate; 
   for (const [key, value] of data) {
     if (key === "size") {
-      size = value;
+      rate = value;
     }
     // let msg = "Choose an option";
-    switch(size){
+    switch(rate){
       case("AED"): 
-        this.size = "AED";
-        sizePrice = 5;
-        return sizePrice;
+        this.rate = "AED";
+        // ratePrice = currencyResponse.conversion_rates["AED"];
+        return ratePrice;
       case("BAM"): 
-        this.size = "BAM";
-        sizePrice = 10;
-        return sizePrice;
+        this.rate = "BAM";
+        // ratePrice = currencyResponse.conversion_rates["BAM"];
+        return ratePrice;
       case("CAD"):
-        this.size = "CAD";
-        sizePrice = 15;
-        return sizePrice;
+        this.rate = "CAD";
+        // ratePrice = currencyResponse.conversion_rates["CAD"];
+        return ratePrice;
         case("DJF"): 
-          this.size = "DJF";
-          sizePrice = 10;
-          return sizePrice;
+          this.rate = "DJF";
+          // ratePrice = currencyResponse.conversion_rates["DJF"];
+          return ratePrice;
         case("EGP"):
-          this.size = "EGP";
-          sizePrice = 15;
-          return sizePrice;
+          this.rate = "EGP";
+          // ratePrice = currencyResponse.conversion_rates["EGP"];
+          return ratePrice;
       default: 
-      console.log("Choose a currency");
+      console.log("Choose a currency OR currency in question doesn't exist.");
       // output.innerHTML = msg;  // webAPI: MessageChannel; 
     }
   }
