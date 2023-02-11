@@ -1,5 +1,5 @@
 export default class CurrencyExchangeService {  
-  static async getCurrency(rain) {
+  static async getCurrency(usDollar) {
     try {
       const response = await fetch(`https://api.simpleswap.io/get_currency?api_key=${process.env.API_KEY}&symbol=btcs`);
       const jsonifiedResponse = await response.json();
@@ -8,7 +8,7 @@ export default class CurrencyExchangeService {
         ${jsonifiedResponse.message}`;
         throw new Error(errorMessage);
       }
-      console.log(rain);
+      console.log(usDollar);
       return jsonifiedResponse;
     } catch(error) {
       return error;
