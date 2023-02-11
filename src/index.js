@@ -6,7 +6,7 @@ import CurrencyExchangeService from './services/currency.js';
 // Business Logic
 
 function getAPIData(city) {
-  CurrencyExchangeService.getWeather(city)
+  CurrencyExchangeService.getCurrency(city)
     .then(function(currencyResponse) {
       if (currencyResponse instanceof Error) {
         const errorMessage = `there was a problem accessing the data from currency exchange request: ${currencyResponse.message}.`;
@@ -46,7 +46,8 @@ function clearResults() {
 function userInputForm(event) {
   event.preventDefault();
   clearResults();
-  const usDollar = document.querySelector('#user-input').value;
+  const usDollar = parseInt(document.querySelector('#user-input').value);
+  console.log("usDollar: ", usDollar);
   document.querySelector('#user-input').value = null;
 
   // const form = document.querySelector("form");
