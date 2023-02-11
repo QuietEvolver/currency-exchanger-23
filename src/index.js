@@ -13,7 +13,7 @@ function getAPIData(city) {
         throw new Error(errorMessage);
       } // loops events
       for (let i = 0; i < 20; i++) {
-        let currentRates = currencyResponse.conversion_rates;// .events[i].name;
+        let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
         console.log(currentRates);
         // TODO: if/else
         displayCurrencies(currentRates, city);
