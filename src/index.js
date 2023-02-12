@@ -12,12 +12,15 @@ function getAPIData(userInput) {
         const errorMessage = `there was a problem accessing the data from currency exchange request: ${currencyResponse.message}.`;
         throw new Error(errorMessage);
       } // loops events
-      // for (let i = 0; i < 20; i++) {
-      //   let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
-      //   console.log(currentRates);
-      //   // TODO: if/else
-      //   displayCurrencies(currentRates, userInput);
-      // } // declared constant outside for var access
+      // let x = [
+      //   "BAM"
+      // ]
+      for (let i = 0; i < 20; i++) {
+        let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
+        console.log(currentRates);
+        // TODO: if/else
+        displayCurrencies(currentRates, userInput);
+      } // declared constant outside for var access
       const currentRates = currencyResponse.conversion_rates; //.events[0].name;
       console.log("current Rates: ", currentRates);
       console.log("current Rates[USD]: ", currentRates[
@@ -34,16 +37,8 @@ function getAPIData(userInput) {
 // currency fxn for latest rates
 function displayCurrencies(req, res){
   // add += to add each [i] of loop
-  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req} `;
+  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req}`;
 }
-
-// //OBJ fam
-// function findRate(rate, error) {
-//   if ((this.rates[rate] !== undefined) || isNaN(this.rates[rate])) {
-//     return this.rates[rate];
-//   }  document.querySelector("#log").innerText += `${error}: Please enter in an amount in USD`
-//   return false;
-// } 
 
 function printError(error) {
   document.querySelector('#error').innerText = error;
