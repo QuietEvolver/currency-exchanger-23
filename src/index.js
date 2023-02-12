@@ -5,8 +5,8 @@ import CurrencyExchangeService from './services/currency.js';
 
 // Business Logic
 
-function getAPIData(city) {
-  CurrencyExchangeService.getCurrency(city)
+function getAPIData(userInput) {
+  CurrencyExchangeService.getCurrency(userInput)
     .then(function(currencyResponse) {
       if (currencyResponse instanceof Error) {
         const errorMessage = `there was a problem accessing the data from currency exchange request: ${currencyResponse.message}.`;
@@ -16,14 +16,14 @@ function getAPIData(city) {
       //   let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
       //   console.log(currentRates);
       //   // TODO: if/else
-      //   displayCurrencies(currentRates, city);
+      //   displayCurrencies(currentRates, userInput);
       // } // declared constant outside for var access
       const currentRates = currencyResponse.conversion_rates[0]; //.events[0].name;
       console.log("current Rates: ", currentRates);
       console.log("current Rates[USD]: ", currentRates[
       "USD"]);
-      console.log("city: ", city);
-      displayCurrencies(currencyResponse, city);
+      console.log("userInput: ", userInput);
+      displayCurrencies(currencyResponse, userInput);
     })
     .catch(function(error) {
       printError(error);
@@ -46,7 +46,7 @@ function clearResults() {
   document.querySelector("#currency").innerText = null;
   document.querySelector('#error').innerText = null;
 }
-function userInputForm(event) {
+function formHandler(event) {
   event.preventDefault();
   clearResults();
   const usDollar = parseInt(document.querySelector('#user-input').value);
@@ -100,5 +100,5 @@ function userInputForm(event) {
 }
 
 window.addEventListener("load", function() {
-  document.querySelector("#user-input-form").addEventListener("submit", userInputForm);
+  document.querySelector("#user-input-form").addEventListener("submit", formHandler);
 });
