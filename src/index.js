@@ -18,7 +18,7 @@ function getAPIData(userInput) {
       //   // TODO: if/else
       //   displayCurrencies(currentRates, userInput);
       // } // declared constant outside for var access
-      const currentRates = currencyResponse.conversion_rates[0]; //.events[0].name;
+      const currentRates = currencyResponse.conversion_rates; //.events[0].name;
       console.log("current Rates: ", currentRates);
       console.log("current Rates[USD]: ", currentRates[
       "USD"]);
@@ -50,7 +50,7 @@ function formHandler(event) {
   event.preventDefault();
   clearResults();
   const usDollar = parseInt(document.querySelector('#user-input').value);
-  console.log("usDollar: ", usDollar);
+  console.log("UserInput: usDollar: ", usDollar);
   document.querySelector('#user-input').value = null;
 
   // const form = document.querySelector("form");
