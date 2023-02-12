@@ -20,6 +20,9 @@ function getAPIData(city) {
       // } // declared constant outside for var access
       const currentRates = currencyResponse.conversion_rates[0]; //.events[0].name;
       console.log("current Rates: ", currentRates);
+      console.log("current Rates[USD]: ", currentRates[
+      "USD"]);
+      console.log("city: ", city);
       displayCurrencies(currencyResponse, city);
     })
     .catch(function(error) {
