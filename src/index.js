@@ -18,7 +18,7 @@ function getAPIData(city) {
       //   // TODO: if/else
       //   displayCurrencies(currentRates, city);
       // } // declared constant outside for var access
-      const currentRates = currencyResponse.conversion_rates[0]; //.events[0].name;
+      const currentRates = currencyResponse.conversion_rates.base_code; //.events[0].name;
       console.log("current Rates: ", currentRates);
       displayCurrencies(currencyResponse, city);
     })
