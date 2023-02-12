@@ -12,13 +12,13 @@ function getAPIData(city) {
         const errorMessage = `there was a problem accessing the data from currency exchange request: ${currencyResponse.message}.`;
         throw new Error(errorMessage);
       } // loops events
-      for (let i = 0; i < 20; i++) {
-        let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
-        console.log(currentRates);
-        // TODO: if/else
-        displayCurrencies(currentRates, city);
-      } // declared constant outside for var access
-      const currentRates = currencyResponse.conversion_rates; //.events[0].name;
+      // for (let i = 0; i < 20; i++) {
+      //   let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
+      //   console.log(currentRates);
+      //   // TODO: if/else
+      //   displayCurrencies(currentRates, city);
+      // } // declared constant outside for var access
+      const currentRates = currencyResponse.conversion_rates[0]; //.events[0].name;
       console.log("current Rates: ", currentRates);
       displayCurrencies(currencyResponse, city);
     })
