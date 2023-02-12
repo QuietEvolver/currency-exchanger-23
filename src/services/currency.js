@@ -10,7 +10,7 @@ export default class CurrencyExchangeService {
       }
       console.log("usDollar: ", usDollar);
       console.log("jsonifiedResponse: ", jsonifiedResponse);
-      console.log("jsonifiedResponse: ", jsonifiedResponse.conversion_rates);
+      console.log("jsonifiedResponse.conversion_rates: ", jsonifiedResponse.conversion_rates);
       console.log("jsonifiedResponse: ", jsonifiedResponse.conversion_rates["USD"]);
       return jsonifiedResponse;
     } catch(error) {
