@@ -30,12 +30,20 @@ function getAPIData(userInput) {
     });
 }
 
+// CALVIN: How does a OBJ.Keys/Entries/Values look like: 
 // currency fxn for latest rates
 function displayCurrencies(req, res){
   // add += to add each [i] of loop
-  document.querySelector("#currency").innerText += `\n Exchange rates in ${res}, are ${req} `;
-
+  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req} `;
 }
+
+// //OBJ fam
+// function findRate(rate, error) {
+//   if ((this.rates[rate] !== undefined) || isNaN(this.rates[rate])) {
+//     return this.rates[rate];
+//   }  document.querySelector("#log").innerText += `${error}: Please enter in an amount in USD`
+//   return false;
+// } 
 
 function printError(error) {
   document.querySelector('#error').innerText = error;
@@ -96,6 +104,7 @@ function formHandler(event) {
   // }
 
   // we update the name of the function that makes the API call
+  // findRate(usDollar);
   getAPIData(usDollar);
 }
 

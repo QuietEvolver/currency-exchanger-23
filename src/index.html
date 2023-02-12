@@ -15,13 +15,13 @@
   </pre>
   <form id="user-input-form">
     <label for="user-input">Enter an amount in dollars (USD):</label>
-    <input id="user-input" type="text">
+    <input id="user-input" type="text" value="0" min="0">
     <!-- radio-rate-select -->
     <fieldset>
       <legend>Select your desired denomination:</legend>
   
       <div>
-        <input id="AED" class="rate" type="radio" name="rate" value="AED">
+        <input id="AED" class="rate" type="radio" name="rate" value="AED" checked>
         <label for="AED">AED</label>
       </div>
   
@@ -31,7 +31,7 @@
       </div>
   
       <div>
-        <input id="CAD" class="rate" type="radio" name="rate" value="CAD" checked>
+        <input id="CAD" class="rate" type="radio" name="rate" value="CAD">
         <label for="CAD">CAD</label>
       </div>
 
