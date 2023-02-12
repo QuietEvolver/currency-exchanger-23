@@ -1,5 +1,5 @@
 export default class CurrencyExchangeService {  
-  static async getCurrency(usDollar) {
+  static async getCurrency() {
     try {
       const response = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`);
       const jsonifiedResponse = await response.json();
@@ -8,7 +8,6 @@ export default class CurrencyExchangeService {
         ${jsonifiedResponse.message}`;
         throw new Error(errorMessage);
       }
-      console.log("usDollar: ", usDollar);
       console.log("jsonifiedResponse: ", jsonifiedResponse);
       console.log("jsonifiedResponse.conversion_rates: ", jsonifiedResponse.conversion_rates);
       console.log("jsonifiedResponse: ", jsonifiedResponse.conversion_rates["USD"]);
