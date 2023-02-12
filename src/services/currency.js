@@ -8,7 +8,10 @@ export default class CurrencyExchangeService {
         ${jsonifiedResponse.message}`;
         throw new Error(errorMessage);
       }
-      console.log(usDollar);
+      console.log("usDollar: ", usDollar);
+      console.log("jsonifiedResponse: ", jsonifiedResponse);
+      console.log("jsonifiedResponse: ", jsonifiedResponse.conversion_rates);
+      console.log("jsonifiedResponse: ", jsonifiedResponse.conversion_rates["USD"]);
       return jsonifiedResponse;
     } catch(error) {
       return error;

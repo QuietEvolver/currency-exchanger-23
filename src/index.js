@@ -18,8 +18,11 @@ function getAPIData(city) {
       //   // TODO: if/else
       //   displayCurrencies(currentRates, city);
       // } // declared constant outside for var access
-      const currentRates = currencyResponse.conversion_rates.base_code; //.events[0].name;
+      const currentRates = currencyResponse.conversion_rates[0]; //.events[0].name;
       console.log("current Rates: ", currentRates);
+      console.log("current Rates[USD]: ", currentRates[
+      "USD"]);
+      console.log("city: ", city);
       displayCurrencies(currencyResponse, city);
     })
     .catch(function(error) {
@@ -30,7 +33,7 @@ function getAPIData(city) {
 // currency fxn for latest rates
 function displayCurrencies(req, res){
   // add += to add each [i] of loop
-  document.querySelector("#currency").innerText += `\n Exchange rates in ${res}, are ${req} `;
+  document.querySelector("#currency").innerText += `\n Exchange rates in $${res}USD, are ${req} `;
 
 }
 
