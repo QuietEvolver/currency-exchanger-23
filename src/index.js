@@ -14,16 +14,22 @@ function getAPIData(userInput) {
       } // loops events
       // let x = Object.entries();
       // for (let i = 0; i < x; i++) {
-        for (let i = 0; i < 20; i++) {
-        let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
-        console.log("APIdata ForLOOP - currentRates: ", currentRates);
-        // TODO: if/else
-        displayCurrencies(currentRates, userInput);
-      } // declared constant outside for var access
+      // for (let i = 0; i < 20; i++) {
+      //   let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
+      //   console.log("APIdata ForLOOP - currentRates: ", currentRates);
+      //   // TODO: if/else
+      //   displayCurrencies(currentRates, userInput);
+      // } // declared constant outside for var access
+
       const currentRates = currencyResponse.conversion_rates; //.events[0].name;
       console.log("current Rates: ", currentRates);
+
+      for (const [key, value] of Object.entries(currentRates)) {
+        console.log(`${key}: ${value}`);
+      }
+
       console.log("current Rates[USD]: ", currentRates["USD"]);
-      let inputUSDmult = currencyResponse.conversion_rates["USD"] * userInput
+      let inputUSDmult = currencyResponse.conversion_rates["USD"] * userInput;
       console.log("jsonifiedResponse * userInputUSD: ", inputUSDmult);
       console.log("userInput: ", userInput);
       displayCurrencies(currencyResponse, userInput);
