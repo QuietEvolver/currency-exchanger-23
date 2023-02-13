@@ -54,8 +54,9 @@ async function userInputForm(event) {
   document.querySelector('#user-input').value = null;
 
   // REPLACE THIS WITH THE RADIO BUTTON VALUE FROM THE FORM
-  const radioValue = "AED" // Hard coded but replace this with the value from form
-
+  // const radioValue = "AED" // Hard coded but replace this with the value from form
+  const radioValue = document.querySelectorAll("input[name=rate]:checked");
+  console.log("radioValue: ", radioValue);
   // We need to use await with async calls (not .then).
   // This function needs to be async in order for await to work inside it.
   // This is why I was so confused with the promises. The browser wasn't
