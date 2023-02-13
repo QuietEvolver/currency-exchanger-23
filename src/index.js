@@ -17,9 +17,8 @@ function getAPIData(userInput) {
     .catch(function(error) {
       printError(error);
     });
-}
+} 
 
-// CALVIN: How does a OBJ.Keys/Entries/Values look like: 
 // currency fxn for latest rates
 function displayCurrencies(req, res){
   const currentRates = req.conversion_rates;
@@ -64,6 +63,35 @@ function formHandler(event) {
   console.log("UserInput: usDollar: ", usDollar);
   document.querySelector('#user-input').value = null;
 
+  let responseDoc = getAPIData(usDollar);
+
+  const radioValue = document.querySelectorAll("input[name=rate]:checked");
+  console.log("userSelection: ", radioValue);
+
+  // Getting just the conversion rates list from the response
+  const conversionRateList = responseDoc.conversion_rates;
+  console.log('conversionRateList', conversionRateList);
+
+  // Getting just the currencyRate from the country entered in the form
+  const currencyRate = conversionRateList[radioValue];
+  console.log('rate', currencyRate);
+
+  // Multiply the currencyRate by the number of dollars entered
+  const converted = currencyRate * usDollar;
+  console.log('converted', converted);
+
+  // Round the amount (using EPSILON to round up if it is a .005, etc)
+  const roundedValue = Math.round((converted + Number.EPSILON) * 100) / 100;
+  console.log('roundedValue', roundedValue);
+
+  for (const [key, value] of Object.entries(radioValue)) {
+    if(radioValue === key){
+      console.log(" key, value, radioValue", key, value, radioValue);
+      return value;
+    }
+    console.log(`${key}: ${value}`);
+  }
+  
   // const form = document.querySelector("form");
   // const log = document.querySelector("#log");
 
@@ -109,6 +137,37 @@ function formHandler(event) {
   // we update the name of the function that makes the API call
   // findRate(usDollar);
   getAPIData(usDollar);
+
+  //   // console.log("incoming e", e);
+  // // e = SubmitEvent;
+  // // console.log("SubmitEvent e", e);
+  // const form = document.querySelector("form");
+  // const log = document.querySelector("#log");
+
+  // form.addEventListener(
+  //   "submit",
+  //   (event) => {
+  //     const data = new FormData(form);
+  //     let output = "";
+  //     for (const entry of data) { // FormDataEntryValue
+  //       output = `${output}${entry[0]}=${entry[1]}\r`;
+  //     }
+  //     log.innerText = output;
+  //     console.log("output: ", output);
+  //     console.log("e, form, log", event, form, log); 
+  //     event.preventDefault(); // }
+  //   },
+  //   false
+  // ); 
+
+  // // const formElement = document.getElementById("order-size");
+  const formUser = event.target;
+  
+  const checkedInput = [...formUser.elements]
+    .filter((input) => input.checked) // Here you filter the inputs to get the checked value
+    .map((input) => input.checked); // here you get the checked input value
+  
+  console.log("checkedInput", checkedInput);
 }
 
 window.addEventListener("load", function() {
