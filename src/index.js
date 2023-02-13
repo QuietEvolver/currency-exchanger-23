@@ -22,18 +22,28 @@ function getAPIData(userInput) {
 // CALVIN: How does a OBJ.Keys/Entries/Values look like: 
 // currency fxn for latest rates
 function displayCurrencies(req, res){
-  const currentRates = req.conversion_rates; //.events[0].name;
-  console.log("current Rates: ", currentRates);
+  const currentRates = req.conversion_rates;
+  // console.log("current Rates: ", currentRates);
 
+  let inputUSDmult = req.conversion_rates["USD"] * res;
+  console.log("Outside for DispCurr(): jsonifiedResponse * resUSD: ", inputUSDmult);
   for (const [key, value] of Object.entries(currentRates)) {
+    let usdMultiplier = req.conversion_rates["USD"] * res;
+    console.log("Inside for DispCurr(): jsonifiedResponse * resUSD: ", usdMultiplier);
+
     console.log(`Display() ${key}: ${value}`);
+    // if (Object.keys(key==="USD")){
+    //   console.log(`pinned ${key==="USD"}: ${value}`);
+    // }
+    if (Object.keys(key==="AED")){
+      let ret =  value * usdMultiplier;
+      console.log("ret", ret);
+      return ret;
+    }
   }
   console.log("current Rates[USD]: ", currentRates["USD"]);
-  let inputUSDmult = req.conversion_rates["USD"] * res;
-  console.log("jsonifiedResponse * resUSD: ", inputUSDmult);
   console.log("res aka userInput: ", res);
 
-  // add += to add each [i] of loop
   document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req}`;
 }
 
@@ -41,7 +51,6 @@ function printError(error) {
   document.querySelector('#error').innerText = error;
 }
 
-//clear previous results.
 function clearResults() {
   document.querySelector("#currency").innerText = null;
   document.querySelector('#error').innerText = null;
