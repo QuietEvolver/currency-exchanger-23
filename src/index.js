@@ -43,7 +43,7 @@ function displayCurrencies(req, res){
   console.log("res aka userInput: ", res);
 
   // add += to add each [i] of loop
-  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req[0]}  ${radioValue}`;
+  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req.conversion_rates[radioValue] * res}  ${radioValue}`;
 }
 
 function printError(error) {
