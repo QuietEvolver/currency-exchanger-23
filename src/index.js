@@ -11,27 +11,7 @@ function getAPIData(userInput) {
       if (currencyResponse instanceof Error) {
         const errorMessage = `there was a problem accessing the data from currency exchange request: ${currencyResponse.message}.`;
         throw new Error(errorMessage);
-      } // loops events
-      // let x = Object.entries();
-      // for (let i = 0; i < x; i++) {
-      // for (let i = 0; i < 20; i++) {
-      //   let currentRates = currencyResponse.conversion_rates[i];// .events[i].name;
-      //   console.log("APIdata ForLOOP - currentRates: ", currentRates);
-      //   // TODO: if/else
-      //   displayCurrencies(currentRates, userInput);
-      // } // declared constant outside for var access
-
-      const currentRates = currencyResponse.conversion_rates; //.events[0].name;
-      console.log("current Rates: ", currentRates);
-
-      for (const [key, value] of Object.entries(currentRates)) {
-        console.log(`${key}: ${value}`);
       }
-
-      console.log("current Rates[USD]: ", currentRates["USD"]);
-      let inputUSDmult = currencyResponse.conversion_rates["USD"] * userInput;
-      console.log("jsonifiedResponse * userInputUSD: ", inputUSDmult);
-      console.log("userInput: ", userInput);
       displayCurrencies(currencyResponse, userInput);
     })
     .catch(function(error) {
@@ -42,6 +22,17 @@ function getAPIData(userInput) {
 // CALVIN: How does a OBJ.Keys/Entries/Values look like: 
 // currency fxn for latest rates
 function displayCurrencies(req, res){
+  const currentRates = req.conversion_rates; //.events[0].name;
+  console.log("current Rates: ", currentRates);
+
+  for (const [key, value] of Object.entries(currentRates)) {
+    console.log(`Display() ${key}: ${value}`);
+  }
+  console.log("current Rates[USD]: ", currentRates["USD"]);
+  let inputUSDmult = req.conversion_rates["USD"] * res;
+  console.log("jsonifiedResponse * resUSD: ", inputUSDmult);
+  console.log("res aka userInput: ", res);
+
   // add += to add each [i] of loop
   document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req}`;
 }
