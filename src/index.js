@@ -20,8 +20,6 @@ function getAPIData(userInput) {
 
 // currency fxn for latest rates
 function displayCurrencies(req, res){
-  // const currentRates = req.conversion_rates; 
-  // console.log("current Rates: ", currentRates);
   const radioValue = document.querySelector("input[name=rate]:checked").value;
 
   // - loop through JSON Obj{k:v} for logging purposes 
@@ -30,6 +28,7 @@ function displayCurrencies(req, res){
   //   console.log(`Display() ${key}: ${value}`);
   // }
   
+  // - i needed to 'see' the code in order to solve
   // console.log("current Rates[USD]: ", currentRates["USD"]);
   // let inputUSDmult = req.conversion_rates["USD"] * res;
   // let inputAEDmult = req.conversion_rates["AED"] * res;
