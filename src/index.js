@@ -17,84 +17,40 @@ function getAPIData(userInput) {
     .catch(function(error) {
       printError(error);
     });
-} 
-// function getCurrency(){
-//   let responseDoc =  CurrencyExchangeService.getCurrency();
-//     responseDoc.then(function(rate){
-//       displayCurrencies(rate);
-//     }, function(error){
-//       printError(error);
-//     });
-//   }
+}
 
 // currency fxn for latest rates
-function displayCurrencies(req, res){ //
-  // const currentRates = req.conversion_rates;
-  // // console.log("current Rates: ", currentRates);
+function displayCurrencies(req, res){
+  const currentRates = req.conversion_rates; //.events[0].name;
+  console.log("current Rates: ", currentRates);
+  const radioValue = document.querySelector("input[name=rate]:checked").value;
+  console.log("current radioValue: ", radioValue);
 
-  // let inputUSDmult = req.conversion_rates["USD"] * res;
-  // console.log("Outside for DispCurr(): jsonifiedResponse * resUSD: ", inputUSDmult);
-  // for (const [key, value] of Object.entries(currentRates)) {
-  //   let usdMultiplier = req.conversion_rates["USD"] * res;
-  //   console.log("Inside for DispCurr(): jsonifiedResponse * resUSD: ", usdMultiplier);
-  //   console.log("${value}", value);
-  //   console.log("${key}", key);
-  //   console.log(`Display() ${key}: ${value}`);
-  //   // if (Object.keys(key==="USD")){
-  //   //   console.log(`pinned ${key==="USD"}: ${value}`);
-  //   // }
-  //   if (Object.keys(key==="AED")){
-  //     let ret =  value * usdMultiplier;
-  //     console.log(`pinned ${key==="AED"}: ${value}`);
-  //     console.log("ret", ret);
-  //     return ret;
-  //   }
-  // }
-  // console.log("current Rates[USD]: ", currentRates["USD"]);
-  // console.log("res aka userInput: ", res);
+  for (const [key, value] of Object.entries(currentRates)) {
+    console.log(`Display() ${key}: ${value}`);
+  }
+  console.log("current Rates[USD]: ", currentRates["USD"]);
+  let inputUSDmult = req.conversion_rates["USD"] * res;
+  let inputAEDmult = req.conversion_rates["AED"] * res;
+  let inputBAMmult = req.conversion_rates["BAM"] * res;
+  let inputCADmult = req.conversion_rates["CAD"] * res;
+  let inputDJFmult = req.conversion_rates["DJF"] * res;
+  let inputEGPmult = req.conversion_rates["EGP"] * res;
+  console.log("jsonifiedResponse* resUSD, AED, BAM, CAD, DJF, EGP : ", inputUSDmult, inputAEDmult, inputBAMmult, inputCADmult, inputDJFmult, inputEGPmult);
   
-  const usDollar = parseInt(document.querySelector('#user-input').value);
-  const radioValue = document.querySelectorAll("input[name=rate]:checked");
-  // Getting just the conversion rates list from the response
-  const conversionRateList = CurrencyExchangeService.getCurrency().conversion_rates; // responseDoc
-  console.log('conversionRateList', conversionRateList);
-  console.log("UserInput: usDollar: ", usDollar);
-  console.log("userSelection: ", radioValue);
-
+  // if 
   
-  document.querySelector("#currency").innerText += `\n Exchange rates in $${usDollar} USD are equivalent to (radioSelect):req ${req} res ${res}`;//;
+  console.log("res aka userInput: ", res);
 
-  document.querySelector('#user-input').value = null;
-
-  // // With await we are now getting the api response here. (errhandle)
-  // let responseDoc = await CurrencyExchangeService.getCurrency();
-  // // console.log('responseDoc', responseDoc);
-
-  // Getting just the currencyRate from the country entered in the form
-  const currencyRate = conversionRateList[radioValue];
-  console.log('rate', currencyRate);
-
-  // Multiply the currencyRate by the number of dollars entered
-  const converted = currencyRate * usDollar;
-  console.log('converted', converted);
-
-  // Round the amount (using EPSILON to round up if it is a .005, etc)
-  const roundedValue = Math.round((converted + Number.EPSILON) * 100) / 100;
-  console.log('roundedValue', roundedValue);
-
-  // for (const [key, value] of Object.entries(radioValue)) {
-  //   if(radioValue === key){
-  //     console.log(" key, value, radioValue", key, value, radioValue);
-  //     return value;
-  //   }
-  //   console.log(`${key}: ${value}`);
-  // }
+  // add += to add each [i] of loop
+  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req[0]}  ${radioValue}`;
 }
 
 function printError(error) {
   document.querySelector('#error').innerText = error;
 }
 
+//clear previous results.
 function clearResults() {
   document.querySelector("#currency").innerText = null;
   document.querySelector('#error').innerText = null;
@@ -102,25 +58,58 @@ function clearResults() {
 function formHandler(event) {
   event.preventDefault();
   clearResults();
-  // const usDollar = parseInt(document.querySelector('#user-input').value);
+  const usDollar = parseInt(document.querySelector('#user-input').value);
   // const radioValue = document.querySelectorAll("input[name=rate]:checked");
-  // // Getting just the conversion rates list from the response
-  // const conversionRateList = responseDoc.conversion_rates;
-  // console.log('conversionRateList', conversionRateList);
-  getAPIData();
-  
-  // console.log("UserInput: usDollar: ", usDollar);
-  // console.log("userSelection: ", radioValue);
+  const radioValue = document.querySelector("input[name=rate]:checked").value;
+  console.log("UserInput: usDollar: ", usDollar);
+  console.log("UserSelect: radioValue: ", radioValue);
+  document.querySelector('#user-input').value = null;
 
+  // const form = document.querySelector("form");
+  // const log = document.querySelector("#log");
 
-  
-  // const formUser = event.target;
-  
-  // const checkedInput = [...formUser.elements]
-  //   .filter((input) => input.checked) // Here you filter the inputs to get the checked value
-  //   .map((input) => input.checked); // here you get the checked input value
-  
-  // console.log("checkedInput", checkedInput);
+  // const data = new FormData(form);
+  // //radio.rate  // Add each size
+  // // let value = this.rate; 
+  // for (const [key, value] of data) {
+  //   if (key === "size") {
+  //     rate = value;
+  //   }
+  //   // let msg = "Choose an option";
+  //   switch(rate){
+  //   case("AED"): 
+  //     this.rate = "AED";
+  //     // ratePrice = currencyResponse.conversion_rates["AED"];
+  //     return ratePrice;
+  //   case("BAM"): 
+  //     this.rate = "BAM";
+  //     // ratePrice = currencyResponse.conversion_rates["BAM"];
+  //     return ratePrice;
+  //   case("CAD"):
+  //     this.rate = "CAD";
+  //     // ratePrice = currencyResponse.conversion_rates["CAD"];
+  //     return ratePrice;
+  //   case("DJF"): 
+  //     this.rate = "DJF";
+  //     // ratePrice = currencyResponse.conversion_rates["DJF"];
+  //     return ratePrice;
+  //   case("EGP"):
+  //     this.rate = "EGP";
+  //     // ratePrice = currencyResponse.conversion_rates["EGP"];
+  //     return ratePrice;
+  //   default: 
+  //     // TODO: Update log --> DOM to return a notification.
+  //     console.log("Choose a currency OR currency in question doesn't exist.");
+  //     // output.innerHTML = msg;  // webAPI: MessageChannel; 
+  //     console.log("entry(ies) ", output);
+  //     event.preventDefault();
+  //   }
+  //   log.innerText = output;
+  // }
+
+  // we update the name of the function that makes the API call
+  // findRate(usDollar);
+  getAPIData(usDollar);
 }
 
 window.addEventListener("load", function() {
