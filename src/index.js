@@ -30,13 +30,15 @@ function displayCurrencies(req, res){
   for (const [key, value] of Object.entries(currentRates)) {
     let usdMultiplier = req.conversion_rates["USD"] * res;
     console.log("Inside for DispCurr(): jsonifiedResponse * resUSD: ", usdMultiplier);
-
+    console.log("${value}", value);
+    console.log("${key}", key);
     console.log(`Display() ${key}: ${value}`);
     // if (Object.keys(key==="USD")){
     //   console.log(`pinned ${key==="USD"}: ${value}`);
     // }
     if (Object.keys(key==="AED")){
       let ret =  value * usdMultiplier;
+      console.log(`pinned ${key==="AED"}: ${value}`);
       console.log("ret", ret);
       return ret;
     }
