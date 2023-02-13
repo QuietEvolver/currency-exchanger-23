@@ -43,7 +43,7 @@ function displayCurrencies(req, res){
   console.log("res aka userInput: ", res);
 
   // add += to add each [i] of loop
-  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${req.conversion_rates[radioValue] * res}  ${radioValue}`;
+  document.querySelector("#currency").innerText += `\n Exchange rates in $${res} USD are equivalent to (radioSelect): ${(req.conversion_rates[radioValue] * res).toFixed(2)}  ${radioValue}.`;
 }
 
 function printError(error) {
@@ -63,7 +63,7 @@ function formHandler(event) {
   const radioValue = document.querySelector("input[name=rate]:checked").value;
   console.log("UserInput: usDollar: ", usDollar);
   console.log("UserSelect: radioValue: ", radioValue);
-  document.querySelector('#user-input').value = null;
+  document.querySelector('#user-input').value = 0;
 
   // const form = document.querySelector("form");
   // const log = document.querySelector("#log");
